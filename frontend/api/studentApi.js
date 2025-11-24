@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BACKEND = "http://localhost:4000";
+export const BACKEND = "https://focus-loop-app.onrender.com/";
 
 export async function getStatus(id) {
   const r = await axios.get(`${BACKEND}/student/${id}/status`);
