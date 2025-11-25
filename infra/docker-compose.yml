@@ -18,7 +18,7 @@ services:
       - N8N_BASIC_AUTH_ACTIVE=false
       - N8N_HOST=0.0.0.0
       - N8N_PORT=5678
-      - DATABASE_URL=postgresql://neondb_owner:npg_VMwWceQBj54C@ep-little-bar-ahjwkl1n-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+      - DATABASE_URL=postgresql://postgres:eLetKxbpxoaOXgoNAJfbhqaJlvrQCHbe@maglev.proxy.rlwy.net:45152/railway
     volumes:
       - n8n_data:/home/node/.n8n
 
