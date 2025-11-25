@@ -17,7 +17,7 @@ export async function dailyCheckin(student_id, score, mins) {
 }
 
 export async function completeIntervention(student_id, intervention_id) {
-  const r = await axios.post(`${BACKEND}/complete-intervention`, {
+  const r = await axios.post(`${BACKEND}/intervention/complete-intervention`, {
     student_id,
     intervention_id,
   });

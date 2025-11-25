@@ -58,6 +58,8 @@ router.post("/complete-intervention", async (req, res) => {
     const { student_id, intervention_id } = req.body;
     if (!student_id || !intervention_id)
         return res.status(400).json({ error: "missing" });
+
+    const io = req.io; 
     const client = await pool.connect();
     try {
         await client.query("BEGIN");
