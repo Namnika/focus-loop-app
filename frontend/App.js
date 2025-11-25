@@ -86,11 +86,6 @@ export default function App() {
 		const mins = Math.floor(focusSec / 60);
 		const score = Number(quiz) || 0
 
-		// validation 
-		if (score < 0 || score > 10) {
-			alert("Quiz score must be between 0 and 10");
-			return;
-		}
 		try {
 			const data = await StudentApi.dailyCheckin(STUDENT_ID, score, mins);
 			setStatus(data.status);
