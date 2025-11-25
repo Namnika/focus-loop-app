@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 app.use(dailyRoutes);
 app.use(interventionRoutes);
-app.use(studentRoutes);
+app.use("/student", studentRoutes);
 socketHandler(io)
 
 async function runMigrations() {
@@ -44,5 +44,5 @@ io.on("connection", (socket) => {
   socket.on("join", (sid) => socket.join(sid));
 });
 
-const PORT = process.env.PORT || "0.0.0.0";
-server.listen(PORT, () => console.log("Server + WebSockets running on", PORT));
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, '0.0.0.0', () => console.log("Server + WebSockets running on", PORT));

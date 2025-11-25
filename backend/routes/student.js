@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-router.get("/student/:id/status", async (req, res) => {
+router.get("/:id/status", async (req, res) => {
     const { id } = req.params;
     const r = await pool.query(
         `SELECT s.id, s.name, s.status, s.current_intervention_id, i.task
