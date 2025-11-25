@@ -20,9 +20,13 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use(dailyRoutes);
-app.use(interventionRoutes);
+app.use("/daily", dailyRoutes);
+app.use("/intervention", interventionRoutes);
 app.use("/student", studentRoutes);
+
+app.use((req, res, next) => {
+  res.status(404).json({ error: 'Endpoint Not Found' });
+});
 socketHandler(io)
 
 async function runMigrations() {
@@ -32,16 +36,9 @@ async function runMigrations() {
   );
   await pool.query(sql);
 }
+
 runMigrations().catch((e) => {
   console.error("migration failed", e);
-});
-
-io.on("connection", (socket) => {
-  console.log("Student connected:", socket.id);
-
-  const { student_id } = socket.handshake.query || {};
-  if (student_id) socket.join(student_id);
-  socket.on("join", (sid) => socket.join(sid));
 });
 
 const PORT = process.env.PORT || 4000;

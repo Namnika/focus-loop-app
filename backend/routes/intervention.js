@@ -10,10 +10,13 @@ router.post("/assign-intervention", async (req, res) => {
 
     if (!student_id || !task)
         return res.status(400).json({ error: "missing fields" });
+
+    const io = req.io; 
     const client = await pool.connect();
     try {
         console.log("DATA:", student_id, task, assigned_by);
         await client.query("BEGIN");
+
         const create = await client.query(
             `INSERT INTO interventions(student_id, task, assigned_by) VALUES($1,$2,$3) RETURNING id`,
             [student_id, task, assigned_by || "mentor"]
@@ -37,7 +40,11 @@ router.post("/assign-intervention", async (req, res) => {
 
         console.log("SOCKET EVENT SENT");
 
-        return res.json({ ok: true, interventionId });
+        return res.json({
+            status: "In Intervention",
+            intervention_id: interventionId,
+            task: task
+        });
     } catch (err) {
         await client.query("ROLLBACK").catch(() => { });
         console.error(err);
